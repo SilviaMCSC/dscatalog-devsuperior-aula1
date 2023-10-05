@@ -22,27 +22,20 @@ public class CategoryResource {
     public ResponseEntity<Page<CategoryDTO>> findAll(
 
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-           @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+            @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
             @RequestParam(value = "orderBy", defaultValue = "name") String orderBy) {
 
         Sort sort = Sort.by(Sort.Direction.valueOf(direction), orderBy);
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, sort);
 
-       // PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),orderBy);
-//essea instanciação foi pasada pelo professor no curso e não resolveu, segundo chat gPT
-// o compliador nãoe stava aceitando, vai entender isso!!!!
+
         Page<CategoryDTO> list = service.findAllPaged(pageRequest);
         return ResponseEntity.ok().body(list);
     }
-       // Page<CategoryDTO> list = service.findAllPaged(PageRequest);
-      // return ResponseEntity.ok().body(list);
-    //}
-
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
-
         CategoryDTO dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
@@ -53,15 +46,12 @@ public class CategoryResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
-
     }
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<CategoryDTO> insert(@PathVariable Long id, @RequestBody CategoryDTO dto) {
         dto = service.upDate(id, dto);
         return ResponseEntity.ok().body(dto);
     }
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<CategoryDTO> delete(@PathVariable Long id) {
         service.delete(id);

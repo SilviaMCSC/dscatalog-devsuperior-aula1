@@ -4,7 +4,7 @@ import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
-import com.devsuperior.dscatalog.services.exceptions.exceptions.DataBaseException;
+import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;

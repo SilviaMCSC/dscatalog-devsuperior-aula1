@@ -22,23 +22,16 @@ public class ProductResource {
     public ResponseEntity<Page<ProductDTO>> findAll(
 
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-           @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+            @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
             @RequestParam(value = "orderBy", defaultValue = "name") String orderBy) {
 
         Sort sort = Sort.by(Sort.Direction.valueOf(direction), orderBy);
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, sort);
 
-       // PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction),orderBy);
-//essea instanciação foi pasada pelo professor no curso e não resolveu, segundo chat gPT
-// o compliador nãoe stava aceitando, vai entender isso!!!!
         Page<ProductDTO> list = service.findAllPaged(pageRequest);
         return ResponseEntity.ok().body(list);
     }
-       // Page<ProductDTO> list = service.findAllPaged(PageRequest);
-      // return ResponseEntity.ok().body(list);
-    //}
-
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
@@ -47,6 +40,7 @@ public class ProductResource {
         return ResponseEntity.ok().body(dto);
     }
 
+    //TODO: Verificar metodos Update e Insert que estão sendo chamados na Service e na CategoryResource
     @PostMapping
     public ResponseEntity<ProductDTO> upDate(@RequestBody ProductDTO dto) {
         dto = service.insert(dto);
